@@ -1,0 +1,8 @@
+C:\Users\Harrison\dev\FontTable\FontTable\bin\Debug\FontTable.exe.config
+C:\Users\Harrison\dev\FontTable\FontTable\bin\Debug\FontTable.exe
+C:\Users\Harrison\dev\FontTable\FontTable\bin\Debug\FontTable.pdb
+C:\Users\Harrison\dev\FontTable\FontTable\obj\Debug\FontTable.csproj.AssemblyReference.cache
+C:\Users\Harrison\dev\FontTable\FontTable\obj\Debug\FontTable.csproj.SuggestedBindingRedirects.cache
+C:\Users\Harrison\dev\FontTable\FontTable\obj\Debug\FontTable.csproj.CoreCompileInputs.cache
+C:\Users\Harrison\dev\FontTable\FontTable\obj\Debug\FontTable.exe
+C:\Users\Harrison\dev\FontTable\FontTable\obj\Debug\FontTable.pdb
