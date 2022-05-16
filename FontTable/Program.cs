@@ -13,12 +13,12 @@ namespace FontTable
         public class CharArr
         {
             //  char array components
-            string character;
-            Font font;
-            Bitmap bmp;
-            Graphics g;
-            int width;
-            int height;
+            public string character;
+            private Font font;
+            private Bitmap bmp;
+            private Graphics g;
+            private int width;
+            private int height;
             public CharArr(string toConvert, string fontName, int fontSize)
             {
                 character = toConvert;
@@ -30,7 +30,7 @@ namespace FontTable
                 bmp = new Bitmap(width, height);
                 g = Graphics.FromImage(bmp);
                 g.Clear(Color.White);
-                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
             }
             public void drawChar()
             {
