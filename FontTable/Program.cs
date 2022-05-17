@@ -69,6 +69,7 @@ namespace FontTable
 
             public void generateTable()
             {
+                Console.WriteLine($"Generating table of type {fontName}, size {fontSize}");
                 List<CharArr> tmpTable = new List<CharArr>();
                 for(var i = 65; i <= 90; i++)
                 {
@@ -91,10 +92,18 @@ namespace FontTable
 
         static void Main(string[] args)
         {
-            FontTable ft = new FontTable("Arial", 24);
-            ft.generateTable();
-            Console.WriteLine($"Generating font table of type {ft.fontName} and size {ft.fontSize}...");
-            ft.printTable();
+            Console.WriteLine("Generating tables...");
+
+            FontTable xL = new FontTable("Arial", 24);
+            xL.generateTable();
+            FontTable L = new FontTable("Arial", 15);
+            L.generateTable();
+            FontTable M = new FontTable("Arial", 12);
+            M.generateTable();
+            FontTable S = new FontTable("Arial", 9);
+            S.generateTable();
+
+            Console.WriteLine("Finished.");
 
             Console.ReadLine();
         }
