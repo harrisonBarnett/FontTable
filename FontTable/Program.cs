@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FontTable
 {
+    // TODO:
+    // bitshift left char hex value to produce 7-bit representation for "7-bit mode"
+    //  
+
     internal class Program
     {
         public class CharArr
@@ -19,6 +20,7 @@ namespace FontTable
             private Graphics g;
             private int width;
             private int height;
+
             public CharArr(string toConvert, string fontName, int fontSize)
             {
                 character = toConvert;
@@ -30,11 +32,10 @@ namespace FontTable
                 bmp = new Bitmap(width, height);
                 g = Graphics.FromImage(bmp);
                 g.Clear(Color.White);
-                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
             }
             public void drawChar()
             {
-                Console.WriteLine($"initiating draw of character {character} in font {font.Name}...");
                 g.DrawString(character, font, new SolidBrush(Color.Black), 0, 0);
 
                 for (int i = 0; i < height; i++)
@@ -46,7 +47,6 @@ namespace FontTable
                     }
                     Console.Write("\n");
                 }
-                Console.WriteLine("...finished drawing character");
 
                 g.Flush();
                 g.Dispose();
@@ -61,22 +61,39 @@ namespace FontTable
             //  font table components
             public string fontName;
             public int fontSize;
-            public FontTable(string name, int size)
+            public string bitMode;
+            public FontTable(string name, int size, string mode)
             {
                 fontName = name;
                 fontSize = size;
+                bitMode = mode;
             }
 
             public void generateTable()
             {
                 Console.WriteLine($"Generating table of type {fontName}, size {fontSize}");
                 List<CharArr> tmpTable = new List<CharArr>();
-                for(var i = 65; i <= 90; i++)
+
+                if(bitMode == "A")
+                    // 7-bit mode, only produce 128 ASCII chars
                 {
-                    string toConvert = Convert.ToChar(i).ToString();
-                    CharArr toAdd = new CharArr(toConvert, fontName, fontSize);
-                    tmpTable.Add(toAdd);
+                    for (var i = 32; i < 128; i++)
+                    {
+                        string toConvert = Convert.ToChar(i).ToString();
+                        CharArr toAdd = new CharArr(toConvert, fontName, fontSize);
+                        tmpTable.Add(toAdd);
+                    }
+                } else
+                {
+                    // 8-bit mode, produce 256 ASCII chars
+                    for (var i = 32; i < 256; i++)
+                    {
+                        string toConvert = Convert.ToChar(i).ToString();
+                        CharArr toAdd = new CharArr(toConvert, fontName, fontSize);
+                        tmpTable.Add(toAdd);
+                    }
                 }
+                table.Add(new CharArr(" ", fontName, fontSize));
                 table = tmpTable;
             }
             
@@ -94,16 +111,18 @@ namespace FontTable
         {
             Console.WriteLine("Generating tables...");
 
-            FontTable xL = new FontTable("Arial", 24);
+            FontTable xL = new FontTable("Arial", 24, "A");
             xL.generateTable();
-            FontTable L = new FontTable("Arial", 15);
+            FontTable L = new FontTable("Arial", 15, "A");
             L.generateTable();
-            FontTable M = new FontTable("Arial", 12);
+            FontTable M = new FontTable("Arial", 12, null);
             M.generateTable();
-            FontTable S = new FontTable("Arial", 9);
+            FontTable S = new FontTable("Arial", 9, null);
             S.generateTable();
 
             Console.WriteLine("Finished.");
+
+            xL.printTable();
 
             Console.ReadLine();
         }
