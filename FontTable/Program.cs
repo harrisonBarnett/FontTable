@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Linq;
 
 namespace FontTable
 {
@@ -71,12 +73,13 @@ namespace FontTable
 
             public void generateTable()
             {
-                Console.WriteLine($"Generating table of type {fontName}, size {fontSize}");
                 List<CharArr> tmpTable = new List<CharArr>();
 
                 if(bitMode == "A")
-                    // 7-bit mode, only produce 128 ASCII chars
                 {
+                    // 7-bit mode, only produce 128 ASCII chars
+
+                    Console.WriteLine($"Generating table of type {fontName}, size {fontSize} in 7-bit mode...");
                     for (var i = 32; i < 128; i++)
                     {
                         string toConvert = Convert.ToChar(i).ToString();
@@ -86,6 +89,8 @@ namespace FontTable
                 } else
                 {
                     // 8-bit mode, produce 256 ASCII chars
+
+                    Console.WriteLine($"Generating table of type {fontName}, size {fontSize} in 8-bit mode...");
                     for (var i = 32; i < 256; i++)
                     {
                         string toConvert = Convert.ToChar(i).ToString();
@@ -109,19 +114,21 @@ namespace FontTable
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Generating tables...");
+            // pull printer config data
+            Console.WriteLine("Reading from file...");
+            string filePath = @"C:\Users\Harrison\dev\FontTable\ARDFyt0000.txt.20210928 094821";
+            string bitMode = "";
+            try
+            {
+                string line = File.ReadLines(filePath).ElementAtOrDefault(2);
+                bitMode = line[3].ToString();
+            } catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
 
-            FontTable xL = new FontTable("Arial", 24, "A");
+            FontTable xL = new FontTable("Arial", 24, bitMode);
             xL.generateTable();
-            FontTable L = new FontTable("Arial", 15, "A");
-            L.generateTable();
-            FontTable M = new FontTable("Arial", 12, null);
-            M.generateTable();
-            FontTable S = new FontTable("Arial", 9, null);
-            S.generateTable();
-
-            Console.WriteLine("Finished.");
-
             xL.printTable();
 
             Console.ReadLine();
