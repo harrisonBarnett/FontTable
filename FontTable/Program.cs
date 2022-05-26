@@ -33,12 +33,12 @@ namespace FontTable
                 height = (int)g.MeasureString(character, font).Height;
                 bmp = new Bitmap(width, height);
                 g = Graphics.FromImage(bmp);
-                g.Clear(Color.White);
-                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+                g.Clear(Color.Black);
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             }
             public void drawChar()
             {
-                g.DrawString(character, font, new SolidBrush(Color.Black), 0, 0);
+                g.DrawString(character, font, new SolidBrush(Color.White), 0, 0);
 
                 for (int i = 0; i < height; i++)
                 {
