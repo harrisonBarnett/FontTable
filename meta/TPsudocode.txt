@@ -1,0 +1,20 @@
+https://docs.microsoft.com/en-us/windows/win32/gdi/character-widths
+https://docs.microsoft.com/en-us/windows/win32/gdi/string-widths-and-heights
+https://docs.microsoft.com/en-us/windows/win32/gdi/font-elements
+A point is .013837 of an inch. Following the point system devised by Pierre Simon Fournier, it is common practice to approximate a point as 1/72 inch.
+72dpi / 72 ppi Legacy standard Display 
+Generate Font tables
+Identify Ticket
+Load Ticket Field
+Load Font tables For each font + size
+Load Image From Ticket
+    if 'A' = set mode 7 bit
+    If 'F'
+        read line  
+         if line.line(6) == 0000FF
+             repeat_cont = line.mid(6,2)
+         repeat add last line repeat count times
+         if line.left(2) == 80
+            line_char_count = line.mid(2,2)
+            read line_char_count *2  characters
+            decode hex
