@@ -8,8 +8,8 @@ using System.Linq;
 namespace FontTable
 {
     // TODO:
-    // bitshift left char hex value to produce 7-bit representation for "7-bit mode"
-    //  
+    // convert "points" of location of properties in ticket (i.e. Area="x,y,width,height") to pixel
+    // parse ticket in this area with font table at appropriate font and size
 
     internal class Program
     {
