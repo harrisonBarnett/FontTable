@@ -8,7 +8,11 @@ using System.Linq;
 namespace FontTable
 {
     // TODO:
-    // convert "points" of location of properties in ticket (i.e. Area="x,y,width,height") to pixel
+    /* convert "points" of location of properties in ticket (i.e. Area="x,y,width,height") to pixel
+     * 72 points per inch
+     * 96 pixels per inch
+     * pixels = points / (72/96)?
+     */
     // parse ticket in this area with font table at appropriate font and size
 
     internal class Program
