@@ -116,7 +116,7 @@ namespace FontTable
         {
             // pull printer config data
             Console.WriteLine("Reading from file...");
-            string filePath = @"C:\Users\Harrison\dev\FontTable\ARDFyt0000.txt.20210928 094821";
+            string filePath = @"C:\Users\Harrison\dev\FontTable\meta\ARDFyt0000.txt.20210928 094821";
             string bitMode = "";
             try
             {
