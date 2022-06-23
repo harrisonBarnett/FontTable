@@ -13,11 +13,23 @@ namespace FontTable
         #endregion  
         public Ticket()
         {
-
+            LoadTicket();
         }
         private void LoadTicket()
         {
-
+            // TODO: load ticketdata from database
+            // for each row, newup a TicketRegion
+            /* new TicketRegion(
+             * ticketdata.NOMFUE,
+             * ticketdata.TMOFUE,
+             * ticketdata.NEGFUE,
+             * [
+                 * ticketdata.TOPCNT,
+                 * ticketdata.LFTCNT,
+                 * ticketdata.ALTCNT,
+                 * ticketdata.ANCCNT
+             * ]
+             * )*/
         }
     }
 
