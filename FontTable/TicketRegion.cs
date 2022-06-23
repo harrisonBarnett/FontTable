@@ -9,28 +9,43 @@ namespace FontTable
         public string FontFamily;
         public int FontSize;
         public bool IsBold;
-        public Dictionary<string, int> RegionArea;
+        public bool IsMetric;
+        public int DPI;
+        public Dictionary<string, double> RegionArea;
         public FontTable FontTable;
         #endregion
-        public TicketRegion(string regionName, string fontFamily, int fontSize, bool isBold, int[] area, string bitMode)
+        public TicketRegion(string regionName, string fontFamily, int fontSize, bool isBold, int[] area, string bitMode, bool isMetric, int dpi)
         {
             RegionName = regionName;
             FontFamily = fontFamily;
             FontSize = fontSize;
             IsBold = isBold;
-            RegionArea = ConvertToPixel(area);
+            IsMetric = isMetric;
+            DPI = dpi;
+            RegionArea = ConvertToPixel(area, isMetric, dpi);
             FontTable = new FontTable(fontFamily, fontSize, bitMode);
             FontTable.generateTable();
         }
-        private Dictionary<string, int> ConvertToPixel(int[] area)
+        private Dictionary<string, double> ConvertToPixel(int[] area, bool isMetric, int dpi)
         {
             // TODO:
-            /* convert "points" of location of properties in ticket (i.e. Area="x,y,width,height") to pixel
-             * 72 points per inch
-             * 96 pixels per inch
-             * pixels = points / (72/96)?
+            /* convert inches/mm to px based on DPI 
              */
-            return new Dictionary<string, int>();
+            double theRatio = 1;
+            if(isMetric)
+            {
+                // do something corresponding to mm > pixel conversion at this.dpi
+            } else
+            {
+                // do something corresponding to inch > pixel conversion at this.dpi
+            }
+
+            Dictionary<string, double> tmp = new Dictionary<string, double>();
+            tmp["x"] = area[0] * theRatio;
+            tmp["y"] = area[1] * theRatio;
+            tmp["width"] = area[2] * theRatio;
+            tmp["height"] = area[3] * theRatio;
+            return tmp;
         }
     }
 }
