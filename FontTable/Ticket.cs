@@ -17,6 +17,8 @@ namespace FontTable
         private void LoadTicket()
         {
             // TODO: load ticketdata from file
+            // TODO: get inch vs. metric mode from line 1 (bool isMetric)
+            // TODO: get DPI information from ticketprinter (int DPI)
             // pull printer config data
             Console.WriteLine("Reading from file...");
             string filePath = @"C:\Users\Harrison\dev\FontTable\meta\ARDFyt0000.txt.20210928 094821";
@@ -42,7 +44,10 @@ namespace FontTable
                  * ticketdata.LFTCNT,
                  * ticketdata.ANCCNT,
                  * ticketdata.ALTCNT,
-             * ]
+             * ],
+             * bitmode,
+             * isMetric,
+             * DPI
              * )*/
         }
     }
