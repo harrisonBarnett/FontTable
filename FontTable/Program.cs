@@ -17,7 +17,8 @@ namespace FontTable
                     24,
                     false,
                     new int[] { 3675, 2400, 1170, 6225 },
-                    "A"
+                    "A", 
+                    false
                 );
             foreach(var value in test.RegionArea)
             {

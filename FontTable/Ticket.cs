@@ -20,13 +20,26 @@ namespace FontTable
             // TODO: get inch vs. metric mode from line 1 (bool isMetric)
             // TODO: get DPI information from ticketprinter (int DPI)
             // pull printer config data
+            // Sample ticket data:
+            // <STX>n           <-- n = inch mode, where units are measured as 1/100 inch
+            // <STX>M3417       <-- M = maximum label length, e.g. 3417 units (34 inches)
+            // <STX>ICAFgfx0    <-- I = init image data; C = default memory module; A = datatype (7bit ASCII); F = format designator (7-bit Datamax-O'Neil); 
             Console.WriteLine("Reading from file...");
             string filePath = @"C:\Users\Harrison\dev\FontTable\meta\ARDFyt0000.txt.20210928 094821";
             string bitMode = "";
+            bool isMetric = false;
+            int ticketLength;
             try
             {
-                string line = File.ReadLines(filePath).ElementAtOrDefault(2);
-                bitMode = line[3].ToString();
+                // Parse metric/imperial mode
+                string firstLine = File.ReadLines(filePath).ElementAt(0);
+                if (firstLine[1].ToString() == "n")
+                {
+                    isMetric = true;
+                }
+                // Parse bitmode from datatype
+                string thirdLine = File.ReadLines(filePath).ElementAtOrDefault(2);
+                bitMode = thirdLine[3].ToString();
             }
             catch (Exception e)
             {

@@ -14,19 +14,18 @@ namespace FontTable
         public Dictionary<string, double> RegionArea;
         public FontTable FontTable;
         #endregion
-        public TicketRegion(string regionName, string fontFamily, int fontSize, bool isBold, int[] area, string bitMode, bool isMetric, int dpi)
+        public TicketRegion(string regionName, string fontFamily, int fontSize, bool isBold, int[] area, string bitMode, bool isMetric)
         {
             RegionName = regionName;
             FontFamily = fontFamily;
             FontSize = fontSize;
             IsBold = isBold;
             IsMetric = isMetric;
-            DPI = dpi;
-            RegionArea = ConvertToPixel(area, isMetric, dpi);
+            RegionArea = ConvertToPixel(area, isMetric);
             FontTable = new FontTable(fontFamily, fontSize, bitMode);
             FontTable.generateTable();
         }
-        private Dictionary<string, double> ConvertToPixel(int[] area, bool isMetric, int dpi)
+        private Dictionary<string, double> ConvertToPixel(int[] area, bool isMetric)
         {
             // TODO:
             /* convert inches/mm to px based on DPI 
