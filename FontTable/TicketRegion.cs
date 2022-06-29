@@ -27,23 +27,29 @@ namespace FontTable
         }
         private Dictionary<string, double> ConvertToPixel(int[] area, bool isMetric)
         {
+            Dictionary<string, double> tmp = new Dictionary<string, double>();
+            tmp["x"] = 0;
+            tmp["y"] = 0;
+            tmp["width"] = 0;
+            tmp["height"] = 0;
             // TODO:
-            /* convert inches/mm to px based on DPI 
+            /*
+             * if isMetric, area[n] / 10
+             * else, area[n] / 100 * 72
              */
-            double theRatio = 1;
             if(isMetric)
             {
                 // do something corresponding to mm > pixel conversion at this.dpi
             } else
             {
-                // do something corresponding to inch > pixel conversion at this.dpi
+                int i = 0;
+                foreach(var key in tmp.Keys)
+                {
+                    tmp[key] = (area[i] / 100) * 72;
+                    i++;
+                }
             }
 
-            Dictionary<string, double> tmp = new Dictionary<string, double>();
-            tmp["x"] = area[0] * theRatio;
-            tmp["y"] = area[1] * theRatio;
-            tmp["width"] = area[2] * theRatio;
-            tmp["height"] = area[3] * theRatio;
             return tmp;
         }
     }

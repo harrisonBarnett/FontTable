@@ -25,10 +25,9 @@ namespace FontTable
             // <STX>M3417       <-- M = maximum label length, e.g. 3417 units (34 inches)
             // <STX>ICAFgfx0    <-- I = init image data; C = default memory module; A = datatype (7bit ASCII); F = format designator (7-bit Datamax-O'Neil); 
             Console.WriteLine("Reading from file...");
-            string filePath = @"C:\Users\Harrison\dev\FontTable\meta\ARDFyt0000.txt.20210928 094821";
-            string bitMode = "";
-            bool isMetric = false;
-            int ticketLength;
+            string filePath = @"C:\N\Projects\DotNet\FontTable\meta\ARDFyt0000.txt.20210928 094821";
+            string bitMode;
+            bool isMetric;
             try
             {
                 // Parse metric/imperial mode
@@ -36,6 +35,9 @@ namespace FontTable
                 if (firstLine[1].ToString() == "n")
                 {
                     isMetric = true;
+                } else
+                {
+                    isMetric = false;
                 }
                 // Parse bitmode from datatype
                 string thirdLine = File.ReadLines(filePath).ElementAtOrDefault(2);
