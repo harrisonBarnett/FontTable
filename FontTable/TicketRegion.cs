@@ -39,7 +39,12 @@ namespace FontTable
              */
             if(isMetric)
             {
-                // do something corresponding to mm > pixel conversion at this.dpi
+                int i = 0;
+                foreach (var key in tmp.Keys)
+                {
+                    tmp[key] = (area[i] / 10) * 72;
+                    i++;
+                }
             } else
             {
                 int i = 0;

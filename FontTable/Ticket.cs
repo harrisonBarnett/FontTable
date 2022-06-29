@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FontTable.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,8 +27,8 @@ namespace FontTable
             // <STX>ICAFgfx0    <-- I = init image data; C = default memory module; A = datatype (7bit ASCII); F = format designator (7-bit Datamax-O'Neil); 
             Console.WriteLine("Reading from file...");
             string filePath = @"C:\N\Projects\DotNet\FontTable\meta\ARDFyt0000.txt.20210928 094821";
-            string bitMode;
-            bool isMetric;
+            string bitMode = "";
+            bool isMetric = false;
             try
             {
                 // Parse metric/imperial mode
@@ -49,21 +50,27 @@ namespace FontTable
             }
             // TODO: load ticketdata fields from database
             // for each row, newup a TicketRegion
-            /* new TicketRegion(
-             * ticketdata.NOMCMP,
-             * ticketdata.NOMFUE,
-             * ticketdata.TMOFUE,
-             * ticketdata.NEGFUE,
-             * [
-                 * ticketdata.TOPCNT,
-                 * ticketdata.LFTCNT,
-                 * ticketdata.ANCCNT,
-                 * ticketdata.ALTCNT,
-             * ],
-             * bitmode,
-             * isMetric,
-             * DPI
-             * )*/
+
+            // TEST TEST TEST
+            TestDbData testData = new TestDbData();
+            TicketRegions.Add(
+                testData.NOMCMP,
+                new TicketRegion(
+                        testData.NOMCMP,
+                        testData.NOMFUE,
+                        testData.TMOFUE,
+                        testData.NEGFUE == "N" ? false : true,
+                        new int[4]
+                        {
+                            testData.TOPCNT,
+                            testData.LFTCNT,
+                            testData.ALTCNT,
+                            testData.ANCCNT
+                        },
+                        bitMode,
+                        isMetric
+                    )
+                ) ;
         }
     }
 

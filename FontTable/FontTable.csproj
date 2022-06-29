@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharArr.cs" />
+    <Compile Include="Data\TestDbData.cs" />
     <Compile Include="FontTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
