@@ -9,7 +9,6 @@ namespace FontTable
     public class Ticket
     {
         #region Properties
-        // Each ticket has ticket regions defined by an area of [x-pos, y-pos, width, height] in FYT
         public Dictionary<string, TicketRegion> TicketRegions = new Dictionary<string, TicketRegion>();
         private string _url;
         private bool isMetric;
@@ -20,6 +19,7 @@ namespace FontTable
             _url = url;
             LoadTicket();
         }
+        // Read a ticketdata file; set modes; generate font tables for each relevant ticket region
         private void LoadTicket()
         {
             // Sample ticket data:
@@ -71,7 +71,14 @@ namespace FontTable
             );
             // END TEST END TEST //
         }
+        // TODO: check every char in a ticketarea against the ticketarea's fonttable to produce a string
+        public void Parse()
+        {
+            Console.WriteLine("Parsing ticket...");
+        }
     }
+    // Each ticketdata file has ticket regions defined by an area of [x-pos, y-pos, width, height] in FYT
+    // These are associated with db objects containing other values such as font type, font size, etc.
     public class TicketRegion
     {
         #region Properties
@@ -95,6 +102,7 @@ namespace FontTable
             FontTable = new FontTable(fontFamily, fontSize, bitMode);
             FontTable.generateTable();
         }
+        // Convert area dimensions to pixel based on metric/imperial units provided by FYT
         private double[] ConvertToPixel(int[] area, bool isMetric)
         {
             double[] tmp = new double[4];

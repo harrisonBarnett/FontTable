@@ -18,7 +18,7 @@ namespace FontTable
             fontSize = size;
             bitMode = mode;
         }
-
+        // Generate a table of ASCII characters contingent on bitmode
         public void generateTable()
         {
             List<CharArr> tmpTable = new List<CharArr>();
@@ -50,7 +50,7 @@ namespace FontTable
             table.Add(new CharArr(" ", fontName, fontSize));
             table = tmpTable;
         }
-
+        // For testing purposes 
         public void printTable()
         {
             table.ForEach(character =>
@@ -60,6 +60,7 @@ namespace FontTable
         }
 
     }
+    // Array of ARGB values representing a drawn char
     public class CharArr
     {
         #region Properties
@@ -73,6 +74,7 @@ namespace FontTable
         #endregion
         public CharArr(string toConvert, string fontName, int fontSize)
         {
+            // Initialize graphics properties for the drawn char
             character = toConvert;
             font = new Font(fontName, fontSize, GraphicsUnit.Pixel);
             bmp = new Bitmap(1, 1);
@@ -84,9 +86,11 @@ namespace FontTable
             g.Clear(Color.Black);
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
+            // Array of strings representing ARGB values of each pixel in char
             Arr = new string[height];
             generateArr();
         }
+        // Generate/set the array of ARGB strings
         private void generateArr()
         {
             g.DrawString(character, font, new SolidBrush(Color.White), 0, 0);
@@ -105,6 +109,7 @@ namespace FontTable
             g.Flush();
             g.Dispose();
         }
+        // For testing purposes
         public void drawChar()
         {
             for (int i = 0; i < height; i++)

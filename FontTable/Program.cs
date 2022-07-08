@@ -11,14 +11,14 @@ namespace FontTable
     {
         static void Main(string[] args)
         {
-            TicketParser parser = new TicketParser(@"C:\N\Projects\DotNet\FontTable\meta\ARDFyt0000.txt.20210928 094821");
-            foreach(var name in parser._ticket.TicketRegions.Values)
+            Ticket ticket = new Ticket(@"C:\N\Projects\DotNet\FontTable\meta\ARDFyt0000.txt.20210928 094821");
+            foreach(var name in ticket.TicketRegions.Values)
             {
                 Console.WriteLine(name.RegionName);
                 FontTable ft = name.FontTable;
                 ft.printTable();
             }
-            
+            ticket.Parse();
         }
     }
 }
