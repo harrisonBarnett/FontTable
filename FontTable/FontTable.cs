@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace FontTable
 {
@@ -58,5 +59,58 @@ namespace FontTable
             });
         }
 
+    }
+    public class CharArr
+    {
+        #region Properties
+        private string character;
+        private Font font;
+        private Bitmap bmp;
+        private Graphics g;
+        private int width;
+        private int height;
+        public string[] Arr; 
+        #endregion
+        public CharArr(string toConvert, string fontName, int fontSize)
+        {
+            character = toConvert;
+            font = new Font(fontName, fontSize, GraphicsUnit.Pixel);
+            bmp = new Bitmap(1, 1);
+            g = Graphics.FromImage(bmp);
+            width = (int)g.MeasureString(character, font).Width;
+            height = (int)g.MeasureString(character, font).Height;
+            bmp = new Bitmap(width, height);
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Black);
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+
+            Arr = new string[height];
+            generateArr();
+        }
+        private void generateArr()
+        {
+            g.DrawString(character, font, new SolidBrush(Color.White), 0, 0);
+
+            for (int i = 0; i < height; i++)
+            {
+                string toAdd = "";
+                for (int j = 0; j < width; j++)
+                {
+                    Color pixel = bmp.GetPixel(j,i);
+                    toAdd += pixel.Name;
+                }
+                Arr[i] = toAdd;
+            }
+            // Flush draw memory
+            g.Flush();
+            g.Dispose();
+        }
+        public void drawChar()
+        {
+            for (int i = 0; i < height; i++)
+            {
+                Console.WriteLine(Arr[i]);
+            }
+        }
     }
 }

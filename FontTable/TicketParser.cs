@@ -13,11 +13,12 @@ namespace FontTable
 {
     public class TicketParser
     {
-        public Ticket Ticket;
-        public TicketParser(Ticket ticket)
+        public Ticket _ticket;
+        public TicketParser(string url)
         {
-            Ticket = ticket;
+            _ticket = new Ticket(url);
         }
+
         public void Parse()
         {
             Console.WriteLine("parsing the ticket");

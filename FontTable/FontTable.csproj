@@ -44,14 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharArr.cs" />
     <Compile Include="Data\TestDbData.cs" />
     <Compile Include="FontTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ticket.cs" />
     <Compile Include="TicketParser.cs" />
-    <Compile Include="TicketRegion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
